@@ -1,14 +1,47 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Produtos</title>
-</head>
-<body>
-    <h1>Rota da página de Produtos da nossa WEB APP</h1>
-    <h1>Uso de render_template</h1>
-    <h2>Gabriel Varela</h2>
-</body>
-
-</html>
+{% extends "base.html" %}
+{% block title %}Produto{% endblock %}
+{% block content %}
+<form action="{{ url_for('produto.formProduto') }}" method="POST">
+    <h1>Produtos</h1>
+    <button type="submit" name="formNovo">Novo Produto</button>
+</form>
+<br>
+<table class="table table-striped table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Valor Unitário</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Foto</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if result %}
+        {% for row in result %}
+        <tr>
+            <th scope="row"> {{ row['id_produto'] }}</th>
+            <td> {{ row['nome'] }}</td>
+            <td> {{ row['valor_unitario'] }}</td>
+            <td> {{ row['descricao'] }}</td>
+            <td><img src="{{ row.foto }}" width="100"></td>
+            <td>
+                <form action="{{ url_for('produto.formEditProduto') }}" method="POST" name="formEdit{{ row['id_produto'] }}">
+                    <input type="hidden" name="id" value="{{ row['id_produto'] }}">
+                    <button type="submit" name="formEditProduto"> <i class="fas fa-edit"></i></button>
+                </form>
+            </td>
+            <td>
+                <form method='POST' name='jsDelete' id='jsDelete'>
+                  <input type='hidden' name='id_produto' value="{{ row['id_produto'] }}">
+                  <button type='submit' name='formDeleteProduto' class='btn'><i class='fas fa-trash'></i></button>
+                </form>
+              </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}
+<br><br><br><br>
+<a href="{{ url_for('index.formIndex') }}">Voltar a página inicial</a>
