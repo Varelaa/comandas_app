@@ -18,7 +18,6 @@
             <th scope="col">Senha</th>
         </tr>
     </thead>
-
     <tbody>
         {% if result %}
         {% for row in result %}
@@ -27,19 +26,27 @@
             <td> {{ row['nome'] }}</td>
             <td> {{ row['cpf'] }}</td>
             <td> {{ row['telefone'] }}</td>
-            <td> {{ row['compra fiado'] }}</td>
-            <td> {{ row['dia fiado'] }}</td>
+            <td> {{ row['compra_fiado'] }}</td>
+            <td> {{ row['dia_fiado'] }}</td>
             <td> {{ row['senha'] }}</td>
-            <td><i class="fas fa-edit"></i></td>
-            <td><i class="fas fa-trash"></i></td>
+            <td>
+                <form action="{{ url_for('cliente.formEditCliente') }}" method="POST" name="formEdit{{ row['id_cliente'] }}">
+                    <input type="hidden" name="id" value="{{ row['id_cliente'] }}">
+                    <button type="submit" name="formEditCliente"> <i class="fas fa-edit"></i></button>
+
+                </form>
+            </td>
+            <td>
+                <form method='POST' name='jsDelete' id='jsDelete'>
+                  <input type='hidden' name='id_cliente' value="{{ row['id_cliente'] }}">
+                  <button type='submit' name='formDeleteCliente' class='btn'><i class='fas fa-trash'></i></button>
+                </form>
+              </td>
         </tr>
         {% endfor %}
         {% endif %}
     </tbody>
 </table>
 {% endblock %}
-<BR>
-<BR>
-<BR>
-<BR>
+<br><br><br><br>
 <a href="{{ url_for('index.formIndex') }}">Voltar a página inicial</a></li>

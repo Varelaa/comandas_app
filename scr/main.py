@@ -1,6 +1,5 @@
 from flask import Flask, render_template
 from settings import HOST, PORT, DEBUG
-
 from mod_index.index import bp_index
 from mod_funcionario.funcionario import bp_funcionario
 from mod_cliente.cliente import bp_cliente
