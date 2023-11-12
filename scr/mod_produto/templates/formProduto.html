@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}produto{% endblock %}
+{% block content %}
+<form name="formAdicionar" action="{{url_for('produto.insert')}}" method="POST" enctype="multipart/form-data">
+    <h1>Produto</h1>
+    <br>
+    <input type="text" name="id" id="id" value="0" placeholder="ID" readonly>
+    <label for="id_produto">Código</label>
+    <br>
+    <input type="text" name="nome" id="nome" value="" placeholder="Nome do Produto" autofocus required>
+    <label for="nome">Nome do Produto</label>
+    <br>
+    <input type="number" name="valor_unitario" id="valor_unitario" value="" required>
+    <label for="valor_unitario">Valor</label>
+    <br>
+    <textarea name="descricao" id="descricao" placeholder="Descrição do Produto" required></textarea>
+    <label for="descricao">Descrição do Produto</label>
+    <br>
+    <label for="foto">Imagem</label>
+    <input type="file" name="foto" accept="image/*" id="foto">
+    <br>
+    <button type='submit' name='salvaProdutoDB' id='salvaProdutoDB'><i class='fas fa-save'></i>Salvar</button>
+</form>
+{% endblock %}
