@@ -38,8 +38,11 @@
                         <a href="{{ url_for('produto.formListaProduto') }}"><i class="fas fa-pizza-slice"></i>
                             Produtos</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a href="{{ url_for('login.logoff') }}"><i class="fas fa-door-open"></i> Sair</a>
+                    </li>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Oi</a></li>
+                        <li><a class="dropdown-item" href="#">Hello</a></li>
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li>
                             <hr class="dropdown-divider">
@@ -56,10 +59,12 @@
         </div>
     </nav>
     {% endblock %}
+
     <div class="container-fluid mt-3">
         {% block content %}{% endblock %}
         <br><br><br>
     </div>
+
     {% block footer %}
     <a href="{{ url_for('index.formIndex') }}"> &copy; 2023 by Gabriel Varela</a>
     {% endblock %}
@@ -68,26 +73,6 @@
     <script src="{{ url_for('static', filename='bootstrap-5.3.2-dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='fontawesome-free-6.4.2-web/js/all.js') }}"></script>
 </body>
-
-<!-- redirect - request.args.get('msg' ou 'msgErro') -->
-{% if request.args.get('msg'): %}
-<script>
-    Swal.fire("Sucesso", "{{ request.args.get('msg') }}", "success");
-</script>
-{% elif request.args.get('msgErro'): %}
-<script>
-    Swal.fire("Erro", "{{ request.args.get('msgErro') }}", "error");
-</script>
-<!-- render_template - msg ou msgErro -->
-{% elif msg: %}
-<script>
-    Swal.fire("ID {{ msg.id }}, {{ msg.msg }} ", "{{ msg }}", "success");
-</script>
-{% elif msgErro: %}
-<script>
-    Swal.fire("{{ msgErro.msg if msgErro.msg else 'Erro' }}", "{{ msgErro }}", "error");
-</script>
-{% endif %}
 
 <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.2-dist/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-6.4.2-web/css/all.min.css') }}">
@@ -101,13 +86,23 @@
 <script src="{{ url_for('static', filename='fontawesome-free-6.4.2-web/js/all.js') }}"></script>
 <script src="{{ url_for('static', filename='sweetalert2.all.min.js') }}"></script>
 
+{% if request.args.get('msg'): %}
 <script>
-    Swal.fire({
-        title: 'Testando',
-        text: 'Aqui tá show!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-    });
+    Swal.fire("Sucesso", "{{ request.args.get('msg') }}", "success");
 </script>
+{% elif request.args.get('msgErro'): %}
+<script>
+    Swal.fire("Erro", "{{ request.args.get('msgErro') }}", "error");
+</script>
+
+{% elif msg: %}
+<script>
+    Swal.fire("ID {{ msg.id }}, {{ msg.msg }} ", "{{ msg }}", "success");
+</script>
+{% elif msgErro: %}
+<script>
+    Swal.fire("{{ msgErro.msg if msgErro.msg else 'Erro' }}", "{{ msgErro }}", "error");
+</script>
+{% endif %}
 
 </html>

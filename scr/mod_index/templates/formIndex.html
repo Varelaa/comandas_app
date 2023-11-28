@@ -3,5 +3,9 @@
 {% block title %}Index{% endblock %}
 
 {% block content %}
-<h1>Seja bem-vindo</h1>
+
+{% if 'login' in session %}
+Bem-vindo <b>{{ session['login'] }}</b>
+{% endif %}
+
 {% endblock %}

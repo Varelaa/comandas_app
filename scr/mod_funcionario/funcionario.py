@@ -1,13 +1,11 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify
 import requests
 from funcoes import Funcoes
 from settings import HEADERS_API, ENDPOINT_FUNCIONARIO
-from flask import Blueprint, render_template, request, redirect, url_for, jsonify
+from mod_login.login import validaSessao
 
 bp_funcionario = Blueprint(
     'funcionario', __name__, url_prefix="/funcionario", template_folder='templates')
-
-''' rotas dos formulários '''
 
 @bp_funcionario.route('/insert', methods=['POST'])
 def insert():
