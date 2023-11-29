@@ -108,3 +108,4 @@ def delete():
     
     except Exception as e:
         return jsonify(erro=True, msgErro=e.args[0])
+    
